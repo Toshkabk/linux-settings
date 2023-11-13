@@ -9,24 +9,24 @@
 ```text
 ip dhcp-server
 ip dhcp-server pool vlan100
-network 10.0.10.0/27
-address-range 10.0.10.10-10.0.10.20
-default-router 10.0.10.1
-domain-name company.prof
+network xxx
+address-range xxx-xxx
+default-router xxx
+domain-name xxx
 end
 commit
 confirm
 save
 ```
 
-Для остальных vlan и RTR2 настройка аналогичная
+
 
 ## Логи
 
 ```text
 configure
 syslog host SRV1
-remote-address 10.0.10.10
+remote-address xxx
 transport udp
 severity debug
 port 514
@@ -41,14 +41,14 @@ save
 ```text
 configure
 object-group network LOCAL
-ip prefix 10.0.10.0/27
+ip prefix xxx
 exit
 object-group network WAN
-ip address-range 10.10.10.2
+ip address-range xxx
 exit
 nat source
 pool WAN
-ip address-range 10.10.10.2
+ip address-range xxx
 ruleset MASQUERADE
 to interface g 1/0/1
 rule 1
@@ -114,36 +114,36 @@ confirm
 
 ```text
 
-# RTR1:
+# R1:
 router ospf log-adjacency-changes
 router ospf 1
  area 1.1.1.1
-  network 10.0.10.0/28
-  network 10.0.10.32/28
-  network 10.0.10.128/27
+  network xxx
+  network xxx
+  network xxx
   enable
   exit
  enable
  exit
 
-# RTR2
+# R2
 router ospf log-adjacency-changes
 router ospf 1
  area 1.1.1.1
-  network 10.0.20.0/28
-  network 10.0.20.32/28
-  network 10.0.20.128/27
+  network xxx
+  network xxx
+  network xxx
   enable
   exit
  enable
  exit
 
-# RTR1
+# R1
 tunnel vti 1
  ip firewall disable
- local address 10.10.10.2
- remote address 10.10.20.2
- ip address 100.0.10.1/30
+ local address xxx
+ remote address xxx
+ ip address xxx
  ip ospf instance 1
  ip ospf area 0.0.0.0
  ip ospf
@@ -153,9 +153,9 @@ tunnel vti 1
 #RTR2
 tunnel vti 1
  ip firewall disable
- local address 10.10.20.2
- remote address 10.10.10.2
- ip address 100.0.10.2/30
+ local address xxx
+ remote address xxx
+ ip address xxx
  ip ospf instance 1
  ip ospf area 1.1.1.1
  ip ospf
