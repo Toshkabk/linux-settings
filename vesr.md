@@ -1,58 +1,8 @@
 # Настраиваем vESR
 
-Дефолтные креды: **admin/password**
 
-Сразу после логина надо поменять
 
-```text
-password P@ssw0rd
-commit
-confirm
-save
-```
 
-## Базовая настройка
-
-Одинаковая на RTR1 и RTR2
-
-Ставим хостнеймы и внешние адреса в сторону испа
-
-```text
-hostname RTR1
-domain name company.prof
-int g 1/0/0
-ip address 10.10.10.2/30
-ip firewall disable
-exit
-ip route 0.0.0.0/0 10.10.10.1
-end
-commit
-confirm
-save
-```
-
-Подинтерфейсы настраиваем следующим образом
-
-```text
-configure
-int g 1/0/1.100
-ip firewall disable
-ip address 10.0.10.1/27
-exit
-int g 1/0/1.200
-ip firewall disable
-ip address 10.0.10.33/27
-exit
-int g 1/0/1.300
-ip firewall disable
-ip address 10.0.10.65/27
-end
-commit
-confirm
-save
-```
-
-На RTR2 настраивается аналогично, меняются подсети
 
 ## DHCP
 
